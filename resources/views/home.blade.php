@@ -1,48 +1,26 @@
-<html>
-<head>
-    <title>Home Page</title>
+@extends('master')
+@section('title', 'Home')
 
-    <link href='//fonts.googleapis.com/css?family=Lato:100' rel='stylesheet' type='text/css'>
+@section('content')
 
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            color: #B0BEC5;
-            display: table;
-            font-weight: 100;
-            font-family: 'Lato';
-        }
+    <div class="container">
+        <div class="row banner">
 
-        .container {
-            text-align: center;
-            display: table-cell;
-            vertical-align: middle;
-        }
+            <div class="col-md-12">
 
-        .content {
-            text-align: center;
-            display: inline-block;
-        }
+                <h1 class="text-center margin-top-100 editContent">
+                    Training plans for racing
+                </h1>
 
-        .title {
-            font-size: 96px;
-            margin-bottom: 40px;
-        }
+                <h3 class="text-center margin-top-100 editContent">welcome</h3>
 
-        .quote {
-            font-size: 24px;
-        }
-    </style>
-</head>
-<body>
-<div class="container">
-    <div class="content">
-        <div class="title">Home Page</div>
-        <div class="quote">Our Home page!</div>
+                <div class="text-center">
+                    <img src="/images/running_man.jpg" width="302" height="391" alt="">
+                </div>
+
+            </div>
+
+        </div>
     </div>
-</div>
-</body>
-</html>
+
+@endsection
