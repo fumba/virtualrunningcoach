@@ -22,6 +22,6 @@ class PagesController extends Controller
 	//Contact page
 	public function contact()
 	{
-		return view('contact');
+		return view('tickets.create');
 	}
 }
