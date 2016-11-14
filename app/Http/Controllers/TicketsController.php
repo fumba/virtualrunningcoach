@@ -102,8 +102,10 @@ class TicketsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
-    }
+   public function destroy($slug)
+	{
+		$ticket = Ticket::whereSlug($slug)->firstOrFail();
+		$ticket->delete();
+		return redirect('/tickets')->with('status', 'The ticket '.$slug.' has been deleted!');
+	}
 }
