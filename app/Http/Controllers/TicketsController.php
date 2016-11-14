@@ -68,10 +68,11 @@ class TicketsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
-    }
+  public function edit($slug)
+	{
+		$ticket = Ticket::whereSlug($slug)->firstOrFail();
+		return view('tickets.edit', compact('ticket'));
+	}
 
     /**
      * Update the specified resource in storage.
@@ -80,10 +81,20 @@ class TicketsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
+  public function update($slug, TicketFormRequest $request)
+{
+    $ticket = Ticket::whereSlug($slug)->firstOrFail();
+    $ticket->title = $request->get('title');
+    $ticket->content = $request->get('content');
+    if($request->get('status') != null) {
+        $ticket->status = 0;
+    } else {
+        $ticket->status = 1;
     }
+    $ticket->save();
+    return redirect(action('TicketsController@edit', $ticket->slug))->with('status', 'The ticket '.$slug.' has been updated!');
+
+}
 
     /**
      * Remove the specified resource from storage.
