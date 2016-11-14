@@ -8,15 +8,6 @@ use App\Ticket;
 
 class TicketsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
 
     /**
      * Show the form for creating a new resource.
@@ -49,17 +40,27 @@ class TicketsController extends Controller
 		
     //return $request->all();
 	}
+	
+	public function index()
+	{
+		$tickets = Ticket::all();
+		return view('tickets.index', compact('tickets'));
+		//alternatives
+		//return view('tickets.index')->with('tickets', $tickets);
+		//return view('tickets.index', ['tickets'=> $tickets]);
+	}
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $slug
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
-    }
+    public function show($slug)
+	{
+		$ticket = Ticket::whereSlug($slug)->firstOrFail();
+		return view('tickets.show', compact('ticket'));
+	}
 
     /**
      * Show the form for editing the specified resource.
