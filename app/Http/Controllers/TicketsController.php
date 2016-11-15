@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\TicketFormRequest;
+use Illuminate\Support\Facades\Mail;
 use App\Ticket;
 
 class TicketsController extends Controller
@@ -35,6 +36,15 @@ class TicketsController extends Controller
 		));
 
 		$ticket->save();
+
+		$data = array(
+			'ticket' => $slug,
+		);
+
+		Mail::send('emails.ticket', $data, function ($message) {
+			$message->from('fumba@chibaka.com', 'Learning Laravel');
+			$message->to('fumba.me@gmail.com')->subject('There is a new ticket!');
+		});
 
 		return redirect('/contact')->with('status', 'Your ticket has been created! Its unique id is: '.$slug);
 		
