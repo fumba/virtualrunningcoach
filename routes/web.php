@@ -12,6 +12,8 @@
 */
 
 Route::get('/', 'PagesController@home');
+Route::get('home', 'PagesController@home');
+
 Route::get('/about', 'PagesController@about');
 Route::get('/contact', 'TicketsController@create');
 Route::post('/contact', 'TicketsController@store');
@@ -22,3 +24,10 @@ Route::post('/ticket/{slug?}/edit','TicketsController@update');
 Route::post('/ticket/{slug?}/delete','TicketsController@destroy');
 
 Route::post('/comment', 'CommentsController@newComment');
+
+Route::get('users/register', 'Auth\RegisterController@showRegistrationForm');
+Route::post('users/register', 'Auth\RegisterController@register');
+Route::get('users/logout', 'Auth\LoginController@logout');
+
+Route::get('users/login', 'Auth\LoginController@showLoginForm');
+Route::post('users/login', 'Auth\LoginController@login');
