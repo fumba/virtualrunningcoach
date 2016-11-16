@@ -32,6 +32,6 @@ Route::get('users/logout', 'Auth\LoginController@logout');
 Route::get('users/login', 'Auth\LoginController@showLoginForm');
 Route::post('users/login', 'Auth\LoginController@login');
 
-Route::group(array('prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth'), function () {
+Route::group(array('prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'manager'), function () {
     Route::get('users', 'UsersController@index');
 });
