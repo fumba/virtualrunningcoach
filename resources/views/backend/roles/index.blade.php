@@ -1,39 +1,30 @@
 @extends('master')
-@section('title', 'All users')
+@section('title', 'All roles')
 @section('content')
 
     <div class="container col-md-8 col-md-offset-2">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h2> All users </h2>
+                <h2> All roles </h2>
             </div>
             @if (session('status'))
                 <div class="alert alert-success">
                     {{ session('status') }}
                 </div>
             @endif
-            @if ($users->isEmpty())
-                <p> There is no user.</p>
+            @if ($roles->isEmpty())
+                <p> There is no role.</p>
             @else
                 <table class="table">
                     <thead>
                     <tr>
-                        <th>ID</th>
                         <th>Name</th>
-                        <th>Email</th>
-                        <th>Joined at</th>
-
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($users as $user)
+                    @foreach($roles as $role)
                         <tr>
-                            <td>{!! $user->id !!}</td>
-                            <td>
-                                <a href="{!! action('Admin\UsersController@edit', $user->id) !!}">{!! $user->name !!} </a>
-                            </td>
-                            <td>{!! $user->email !!}</td>
-                            <td>{!! $user->created_at !!}</td>
+                            <td>{!! $role->name !!}</td>
                         </tr>
                     @endforeach
                     </tbody>
