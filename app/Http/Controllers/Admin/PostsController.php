@@ -4,6 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Category;
+use App\Post;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\PostFormRequest;
+use App\Http\Requests\PostEditFormRequest;
 
 class PostsController extends Controller
 {
@@ -13,9 +19,10 @@ class PostsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        //
-    }
+	{
+		$posts = Post::all();
+		return view('backend.posts.index', compact('posts'));
+	}
 
     /**
      * Show the form for creating a new resource.
@@ -24,7 +31,8 @@ class PostsController extends Controller
      */
    public function create()
 	{
-		return view('backend.posts.create');
+		$categories = Category::all();
+		return view('backend.posts.create', compact('categories'));
 	}
 
     /**
@@ -33,10 +41,21 @@ class PostsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
-    }
+    public function store(PostFormRequest $request)
+	{
+		$user_id = Auth::user()->id;
+		$post= new Post(array(
+			'title' => $request->get('title'),
+			'content' => $request->get('content'),
+			'slug' => Str::slug($request->get('title'), '-'),
+			'user_id' => $user_id
+		));
+
+		$post->save();
+		$post->categories()->sync($request->get('categories'));
+
+		return redirect('/admin/posts/create')->with('status', 'The post has been created!');
+	}
 
     /**
      * Display the specified resource.
@@ -56,9 +75,12 @@ class PostsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
-        //
-    }
+	{
+		$post = Post::whereId($id)->firstOrFail();
+		$categories = Category::all();
+		$selectedCategories = $post->categories->pluck('id')->toArray();;
+		return view('backend.posts.edit', compact('post', 'categories', 'selectedCategories'));
+	}
 
     /**
      * Update the specified resource in storage.
@@ -67,10 +89,18 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+   public function update($id, PostEditFormRequest $request)
+	{
+		$post = Post::whereId($id)->firstOrFail();
+		$post->title = $request->get('title');
+		$post->content = $request->get('content');
+		$post->slug = Str::slug($request->get('title'), '-');
+
+		$post->save();
+		$post->categories()->sync($request->get('categories'));
+
+		return redirect(action('Admin\PostsController@edit', $post->id))->with('status', 'The post has been updated!');
+	}
 
     /**
      * Remove the specified resource from storage.
