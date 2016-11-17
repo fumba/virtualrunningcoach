@@ -102,5 +102,8 @@ alter table `category_post` add index `category_post_post_id_index`(`post_id`);
 
 alter table `category_post` add index `category_post_category_id_index`(`category_id`);
 
+-- COMMENTS
+alter table `comments` add `post_type` varchar(255) null;
+
 
 
