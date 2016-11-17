@@ -51,3 +51,5 @@ Route::group(array('prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 
 	Route::get('categories/create', 'CategoriesController@create');
 	Route::post('categories/create', 'CategoriesController@store');
 });
+
+Route::get('/blog', 'BlogController@index');
