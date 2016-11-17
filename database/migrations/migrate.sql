@@ -76,3 +76,31 @@ alter table `role_has_permissions` add constraint `role_has_permissions_role_id_
 alter table `role_has_permissions` add primary key 
 `role_has_permissions_permission_id_role_id_primary`(`permission_id`, `role_id`);
 
+-- POSTS
+create table `posts` (`id` int unsigned not null auto_increment primary key, `title` varchar(255) not 
+null, `content` text not null, `slug` varchar(255) null, `status` tinyint not null default '1', `user_id` 
+int null, `created_at` timestamp null, `updated_at` timestamp null) default character set utf8 collate 
+utf8_unicode_ci;
+
+
+-- CATEGORIES
+create table `categories` (`id` int unsigned not null auto_increment primary key, `name` varchar(255) not 
+null, `created_at` timestamp null, `updated_at` timestamp null) default character set utf8 collate 
+utf8_unicode_ci;
+ 
+create table `category_post` (`id` int unsigned not null auto_increment primary key, `post_id` int 
+unsigned not null, `category_id` int unsigned not null, `created_at` timestamp null, `updated_at` 
+timestamp null) default character set utf8 collate utf8_unicode_ci;
+
+alter table `category_post` add constraint `category_post_category_id_foreign` foreign key 
+(`category_id`) references `categories` (`id`) on delete cascade on update cascade;
+
+alter table `category_post` add constraint `category_post_post_id_foreign`foreign key (`post_id`) 
+references `posts` (`id`) on delete cascade on update cascade;
+
+alter table `category_post` add index `category_post_post_id_index`(`post_id`);
+
+alter table `category_post` add index `category_post_category_id_index`(`category_id`);
+
+
+
