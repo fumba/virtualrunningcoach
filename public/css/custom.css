@@ -1,0 +1,75 @@
+@CHARSET "ISO-8859-1";
+
+html {
+	position: relative;
+	min-height: 100%;
+}
+
+body {
+	/* Margin bottom by footer height */
+	margin-bottom: 40px;
+}
+
+.footer {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	height: 40px;
+	background-color: #660303;
+	margin-top: 20px;
+	clear: both;
+}
+
+.footer-text {
+	margin-top: 5px;
+	color: white;
+}
+
+.footer-text a {
+	color: orange;
+}
+
+.container {
+	overflow: hidden;
+}
+
+.card {
+	margin-bottom: 12px;
+}
+
+.card-text {
+	padding-top: 3px;
+	padding-right: 1px;
+	padding-left: 5px;
+}
+
+.card-image-custom {
+	max-width: 100%;
+	height: auto;
+	float: right;
+	
+}
+
+.card a {
+	font-weight: bold;
+}
+
+/* unvisited link */
+.card a:link {
+	color: #660303;
+}
+
+/* visited link */
+.card a:visited {
+	color: #660303;
+}
+
+/* mouse over link */
+.card a:hover {
+	color: green;
+}
+
+/* selected link */
+.card a:active {
+	color: #660303;
+}
