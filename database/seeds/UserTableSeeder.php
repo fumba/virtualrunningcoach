@@ -7,7 +7,7 @@ class UserTableSeeder extends Seeder {
 	 * @return void
 	 */
 	public function run() {
-		DB::table ( 'users' )->insert ( [
+		 DB::table ( 'users' )->insert ( [
 				[
 						'name' => 'Nathan',
 						'email' => 'test1@email.com',

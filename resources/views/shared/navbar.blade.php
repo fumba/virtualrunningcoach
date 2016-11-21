@@ -14,19 +14,15 @@
         <!-- Navbar Right -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
-                <li class="active"><a href="/">Home</a></li>
-                <li><a href="/about">About</a></li>
-				<li><a href="/blog">Blog</a></li>
-                <li><a href="/contact">Contact</a></li>
-
-						@if (Auth::check())
+                <li class="{{ Request::is('/') || Request::is('home') ? 'active' : '' }}" ><a href="/">Home</a></li>
+				    @if (Auth::check())
 							@role('manager')
-								<li><a href="/admin">Admin</a></li>
+								<li><a href="/admin" class="{{ Request::is('admin') ? 'active' : '' }}" >Admin</a></li>
 							@endrole
-							<li><a href="/users/logout">Logout</a></li>
+							<li><a href="/users/logout" >Logout</a></li>
 						@else
-							<li><a href="/users/register">Register</a></li>
-							<li><a href="/users/login">Login</a></li>
+							<li><a href="/users/register" class="{{ Request::is('/users/register') ? 'active' : '' }}" >Register</a></li>
+							<li><a href="/users/login" class="{{ Request::is('/users/login') ? 'active' : '' }}" >Login</a></li>
 						@endif
 
             </ul>

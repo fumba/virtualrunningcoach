@@ -57,3 +57,7 @@ Route::group ( array (
 
 Route::get ( '/blog', 'BlogController@index' );
 Route::get('/blog/{slug?}', 'BlogController@show');
+
+Route::get('/plan/{plan_type?}', 'PlansController@show');
+
+
