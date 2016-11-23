@@ -52,8 +52,9 @@ class PlansTableSeeder extends Seeder {
 						'week_id' => '1',
 						'name' => 'Monday',
 						'order' => '1',
-						'distance' => '5',
+						'distance' => '2',
 						'status' => '1',
+						'details' => 'Warm up: 10 minutes dynamic stretching.<br>Run 2 miles easy, taking walking breaks if needed.',
 						'created_at' => new DateTime (),
 						'updated_at' => new DateTime ()
 				],
@@ -63,6 +64,7 @@ class PlansTableSeeder extends Seeder {
 						'order' => '1',
 						'distance' => '0',
 						'status' => '1',
+						'details' => 'Cross Training Day: Pick your favourite (swimming, biking, rowing, etc.). Do 30 minutes at moderate intensity.',
 						'created_at' => new DateTime (),
 						'updated_at' => new DateTime ()
 				],
@@ -70,8 +72,9 @@ class PlansTableSeeder extends Seeder {
 						'week_id' => '1',
 						'name' => 'Wednesday',
 						'order' => '1',
-						'distance' => '3',
+						'distance' => '0',
 						'status' => '1',
+						'details' => 'Rest Day',
 						'created_at' => new DateTime (),
 						'updated_at' => new DateTime ()
 				],
@@ -81,6 +84,7 @@ class PlansTableSeeder extends Seeder {
 						'order' => '1',
 						'distance' => '2',
 						'status' => '0',
+						'details' => 'Warm up: 10 minutes dynamic stretching. <br>Run 2 miles easy, taking walking breaks if needed.  ',
 						'created_at' => new DateTime (),
 						'updated_at' => new DateTime ()
 				],
@@ -90,6 +94,7 @@ class PlansTableSeeder extends Seeder {
 						'order' => '1',
 						'distance' => '0',
 						'status' => '0',
+						'details' => 'Strength Training Day: Do a total body workout that includes leg, arm, and core exercises.',
 						'created_at' => new DateTime (),
 						'updated_at' => new DateTime ()
 				],
@@ -99,6 +104,7 @@ class PlansTableSeeder extends Seeder {
 						'order' => '1',
 						'distance' => '3',
 						'status' => '0',
+						'details' => 'Warm up: 10 minutes dynamic stretching. <br>Run 3 miles. If needed, take 3 minutes walking between each mile.',
 						'created_at' => new DateTime (),
 						'updated_at' => new DateTime ()
 				],
@@ -108,6 +114,7 @@ class PlansTableSeeder extends Seeder {
 						'order' => '1',
 						'distance' => '2',
 						'status' => '0',
+						'details' => 'Rest Day',
 						'created_at' => new DateTime (),
 						'updated_at' => new DateTime ()
 				]

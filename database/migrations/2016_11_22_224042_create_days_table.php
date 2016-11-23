@@ -20,6 +20,7 @@ class CreateDaysTable extends Migration
             $table->integer('status')->default(0);
             $table->integer('distance')->default(0);
             $table->string('name', 20);
+            $table->string('details');
             $table->timestamps();
         });
     }
