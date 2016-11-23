@@ -6,8 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 use App\Week;
 
 class Plan extends Model {
-
-	protected $guarded = ['id'];
+	protected $guarded = [
+			'id'
+	];
 
 	// Get the weekly schedule for the plan
 	public function weeks() {
