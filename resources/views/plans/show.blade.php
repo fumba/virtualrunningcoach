@@ -30,6 +30,7 @@
 						cupidatat skateboard dolor brunch. Food truck quinoa nesciunt
 						laborum eiusmod.</p>
 
+					<div class="table-responsive plans-table">
 					<table class="table table-inverse">
 						<thead>
 						</thead>
@@ -37,14 +38,11 @@
 							@foreach ($week->days as $day)
 							<tr>
 								<td>{!! $day->name !!}</td>
-								<td>{!! $day->distance !!} miles |
-									<button type="button" class="btn btn-link btn-sm"
-										data-toggle="modal" data-target="#modal{!! $day->id !!}">more
-										details...</button>
+								<td><button type="button" class="btn btn-info btn-sm"
+										data-toggle="modal" data-target="#modal{!! $day->id !!}"> {!! $day->distance !!} miles ... </button>
 								</td>
-								<td>{!! $day->status == 0 ? 'Not Completed': 'Completed' !!}</td>
-								<td><button type="button" class="btn btn-info btn-sm">Log
-										Progress</button></td>
+								<td>{!! $day->status == 0 ? 'N': 'C' !!}</td>
+								<td><button type="button" class="btn btn-info btn-sm">Log</button></td>
 							</tr>
 
 							<div class="modal fade" id="modal{!! $day->id !!}" tabindex="-1"
@@ -61,7 +59,7 @@
 										</div>
 										<div class="modal-body">
 											<p>{!! $day->details !!}</p>
-											<img src="/images/weather_placeholder.png" /> <a
+											<img src="/images/weather_placeholder.png" /><br> <a
 												href="/users/login">Log in to view weather and log your
 												progress</a>
 										</div>
@@ -76,8 +74,7 @@
 							@endforeach
 						</tbody>
 					</table>
-
-
+					</div>
 
 				</div>
 			</div>
