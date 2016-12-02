@@ -1,10 +1,10 @@
-@extends('master') @section('title', $type.' TRAINING')
+@extends('master') @section('title', $name.' TRAINING')
 @section('content')
 
 <div class="container col-md-8 col-md-offset-2">
 
-	@if ($type)
-	<div class="alert alert-success">{!! $type !!} TRAINING</div>
+	@if ($name)
+	<div class="alert alert-success">{!! $name !!} TRAINING</div>
 	@endif @if ($weeks->isEmpty())
 	<p>Data not found.</p>
 	@else
@@ -31,49 +31,26 @@
 						laborum eiusmod.</p>
 
 					<div class="table-responsive plans-table">
-					<table class="table table-inverse">
-						<thead>
-						</thead>
-						<tbody>
-							@foreach ($week->days as $day)
-							<tr>
-								<td>{!! $day->name !!}</td>
-								<td><button type="button" class="btn btn-info btn-sm"
-										data-toggle="modal" data-target="#modal{!! $day->id !!}"> {!! $day->distance !!} miles ... </button>
-								</td>
-								<td>{!! $day->status == 0 ? 'N': 'C' !!}</td>
-								<td><button type="button" class="btn btn-info btn-sm">Log</button></td>
-							</tr>
+						<table class="table table-inverse">
+							<thead>
+							</thead>
+							<tbody>
+								@foreach ($week->days as $day)
+								<tr>
+									<td>{!! $day->name !!}</td>
+									<td><button type="button" class="btn btn-info btn-sm"
+											data-toggle="modal" data-target="#modal{!! $day->id !!}">{!!
+											$day->distance !!} miles ...</button></td>
+									<td>{!! $day->status == 0 ? '<i class="fa fa fa-circle-thin"
+										style="color: red"></i>': '<i class="fa fa-check-circle"
+										style="color: green"></i>' !!}
+									</td>
+									<td><a href="/plan/log/{!! $week->id !!}/{!! $day -> id !!}" class="btn btn-info btn-sm">Log</a></td>
+								</tr>
 
-							<div class="modal fade" id="modal{!! $day->id !!}" tabindex="-1"
-								role="dialog" aria-labelledby="myLargeModalLabel">
-								<div class="modal-dialog modal-lg" role="document">
-									<div class="modal-content">
-										<div class="modal-header">
-											<button type="button" class="close" data-dismiss="modal"
-												aria-label="Close">
-												<span aria-hidden="true">&times;</span>
-											</button>
-											<h4 class="modal-title">Week {!! $week->id !!} - {!!
-												$day->name !!}</h4>
-										</div>
-										<div class="modal-body">
-											<p>{!! $day->details !!}</p>
-											<img src="/images/weather_placeholder.png" /><br> <a
-												href="/users/login">Log in to view weather and log your
-												progress</a>
-										</div>
-										<div class="modal-footer">
-											<button type="button" class="btn btn-default"
-												data-dismiss="modal">Close</button>
-										</div>
-									</div>
-								</div>
-							</div>
-
-							@endforeach
-						</tbody>
-					</table>
+								@include('plans.include.more_details_modal') @endforeach
+							</tbody>
+						</table>
 					</div>
 
 				</div>

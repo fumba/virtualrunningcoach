@@ -56,8 +56,13 @@ Route::group ( array (
 } );
 
 Route::get ( '/blog', 'BlogController@index' );
-Route::get('/blog/{slug?}', 'BlogController@show');
+Route::get ( '/blog/{slug?}', 'BlogController@show' );
 
-Route::get('/plan/{plan_type?}', 'PlansController@show');
+Route::get ( '/plan/{plan_type?}', 'PlansController@showPlans' );
+Route::get ( '/plan/enroll/{plan_type?}', 'PlansController@enroll' );
+Route::post ( '/plan/enroll/{plan_type?}', 'PlansController@saveEnrollment' );
+
+Route::get ( '/plan/log/{week?}/{day?}', 'PlansController@showLogScreen' );
+Route::post ( '/plan/log/{week?}/{day?}', 'PlansController@saveEnrollment' );
 
 

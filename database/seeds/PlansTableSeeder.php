@@ -8,25 +8,49 @@ class PlansTableSeeder extends Seeder {
 	 */
 	public function run() {
 
+		// Create test users
+		DB::table ( 'users' )->insert ( [
+				[
+						'name' => '5K TEST USER',
+						'email' => 'test@email.com',
+						'password' => bcrypt ( 'password' ),
+						'created_at' => new DateTime (),
+						'updated_at' => new DateTime (),
+						'plan_type' => '5k'
+				],
+				[
+						'name' => 'NO PLAN TEST USER',
+						'email' => 'test2@email.com',
+						'password' => bcrypt ( 'password' ),
+						'created_at' => new DateTime (),
+						'updated_at' => new DateTime (),
+						'plan_type' => ''
+				]
+		] );
+
 		// Create plans
 		DB::table ( 'plans' )->insert ( [
 				[
 						'type' => '5k',
+						'name' => '5K',
 						'created_at' => new DateTime (),
 						'updated_at' => new DateTime ()
 				],
 				[
 						'type' => '10k',
+						'name' => '10K',
 						'created_at' => new DateTime (),
 						'updated_at' => new DateTime ()
 				],
 				[
 						'type' => 'half_marathon',
+						'name' => 'Half Marathon',
 						'created_at' => new DateTime (),
 						'updated_at' => new DateTime ()
 				],
 				[
 						'type' => 'marathon',
+						'name' => 'Marathon',
 						'created_at' => new DateTime (),
 						'updated_at' => new DateTime ()
 				]
@@ -118,7 +142,6 @@ class PlansTableSeeder extends Seeder {
 						'created_at' => new DateTime (),
 						'updated_at' => new DateTime ()
 				]
-		]
-		 );
+		] );
 	}
 }
