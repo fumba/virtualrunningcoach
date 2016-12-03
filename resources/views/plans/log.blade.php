@@ -1,4 +1,4 @@
-@extends('master') @section('title', 'Enroll in a Plan')
+@extends('master') @section('title', 'Log Miles')
 
 @section('content')
 <div class="container col-md-8 col-md-offset-2">
@@ -18,19 +18,26 @@
 
 				<div class="form-group">
 					<div class="col-lg-10">
-						<ul class="list-group">
-							<div class="btn-group" data-toggle="buttons">
-								@foreach($plans as $plan) <label
-									class="btn  btn-default {!! $plan->type == $type ? 'active' : ''  !!}">
-									<input type="radio" name="options"
-									id="option{!! $plan->type !!}" autocomplete="off" {!! $plan->type
-									== $type ? 'checked' : '' !!} value="{!! $plan->type !!}"> {!!
-									$plan -> name !!}
-								</label> @endforeach
-							</div>
-						</ul>
+
+						<div id="miles_container">
+						<input id="miles" type="text" value="0.00" name="miles">
+						</div>
+						<script>
+            $("input[name='miles']").TouchSpin({
+                min: 0,
+                max: 100,
+                step: 0.1,
+                decimals: 2,
+                boostat: 5,
+                maxboostedstep: 10,
+                postfix: 'miles'
+            });
+        </script>
+
 					</div>
 				</div>
+
+
 
 				<div class="form-group">
 					<div class="col-lg-10 col-lg-offset-2">

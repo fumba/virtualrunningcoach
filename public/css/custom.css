@@ -47,7 +47,6 @@ body {
 	max-width: 100%;
 	height: auto;
 	float: right;
-	
 }
 
 .card a {
@@ -74,15 +73,19 @@ body {
 	color: #660303;
 }
 
-.plans-table{
+.plans-table {
 	max-width: 400px;
 }
 
-.btn-sm{
+.btn-sm {
 	margin-bottom: -2px;
 	margin-top: -2px;
 }
 
-.more{
+.more {
 	font-size: small;
+}
+
+#miles_container {
+	max-width: 300px;
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Plan;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\EnrollFormRequest;
+use App\Http\Requests\LogMilesFormRequest;
 
 class PlansController extends Controller {
 
@@ -38,12 +39,23 @@ class PlansController extends Controller {
 				'name' => $plan->name
 		] );
 	}
-	public function showLogScreen($type = '') {
-		$plans = Plan::all ();
-		return view ( 'plans.enroll', [
-				'plans' => $plans,
-				'type' => $type
-		] );
+
+	/**
+	 *
+	 * @param string $week
+	 * @param string $day
+	 * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
+	 */
+	public function showLogScreen($week = '', $day = '') {
+		return view ( 'plans.log', [ ] );
+	}
+
+	/**
+	 *
+	 * @param EnrollFormRequest $request
+	 */
+	public function saveLoggedMiles(LogMilesFormRequest $request) {
+		return $request->all ();
 	}
 
 	/**

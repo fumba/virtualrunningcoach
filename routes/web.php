@@ -63,6 +63,6 @@ Route::get ( '/plan/enroll/{plan_type?}', 'PlansController@enroll' );
 Route::post ( '/plan/enroll/{plan_type?}', 'PlansController@saveEnrollment' );
 
 Route::get ( '/plan/log/{week?}/{day?}', 'PlansController@showLogScreen' );
-Route::post ( '/plan/log/{week?}/{day?}', 'PlansController@saveEnrollment' );
+Route::post ( '/plan/log/{week?}/{day?}', 'PlansController@saveLoggedMiles' );
 
 
