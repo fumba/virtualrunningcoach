@@ -45,7 +45,11 @@
 										style="color: red"></i>': '<i class="fa fa-check-circle"
 										style="color: green"></i>' !!}
 									</td>
+									@if( Auth::check())
 									<td><a href="/plan/log/{!! $week->id !!}/{!! $day -> id !!}" class="btn btn-info btn-sm">Log</a></td>
+									@else
+									<td><a href="/users/login" class="btn btn-info btn-sm">Log</a></td>
+									@endif
 								</tr>
 
 								@include('plans.include.more_details_modal') @endforeach

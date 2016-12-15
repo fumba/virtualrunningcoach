@@ -78,6 +78,9 @@ class PlansController extends Controller {
 	 * @param FormRequest $request
 	 */
 	public function saveEnrollment(EnrollFormRequest $request) {
-		return $request->all ();
+		$user = Auth::user ();
+		$user->plan_type = $request->get ( 'options' );
+		$user -> save();
+		return redirect(action('PlansController@showPlans'))->with('status', 'The post has been updated!');
 	}
 }
