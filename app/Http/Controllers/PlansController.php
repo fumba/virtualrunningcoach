@@ -6,6 +6,7 @@ use App\Plan;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\EnrollFormRequest;
 use App\Http\Requests\LogMilesFormRequest;
+use App\PlanDays;
 
 class PlansController extends Controller {
 
@@ -55,7 +56,11 @@ class PlansController extends Controller {
 	 * @param EnrollFormRequest $request
 	 */
 	public function saveLoggedMiles(LogMilesFormRequest $request) {
-		return $request->all ();
+		$user = Auth::user ();
+		$plan_days = PlanDays::whereUserId ( $user->id )->first ();
+		$plan_days->day_1 = $request->get ( 'miles' );
+		$plan_days -> save();
+		return redirect ( action ( 'PlansController@showPlans' ) )->with ( 'status', 'Your miles have been logged!' );
 	}
 
 	/**
@@ -80,7 +85,7 @@ class PlansController extends Controller {
 	public function saveEnrollment(EnrollFormRequest $request) {
 		$user = Auth::user ();
 		$user->plan_type = $request->get ( 'options' );
-		$user -> save();
-		return redirect(action('PlansController@showPlans'))->with('status', 'The post has been updated!');
+		$user->save ();
+		return redirect ( action ( 'PlansController@showPlans' ) )->with ( 'status', 'The post has been updated!' );
 	}
 }

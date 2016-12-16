@@ -8,6 +8,11 @@ class PlansTableSeeder extends Seeder {
 	 */
 	public function run() {
 
+		//Assign plan to user.
+		DB::table ( 'plan_days' )->insert ( [
+				'user_id' => 1
+		] );
+
 		// Create test users
 		DB::table ( 'users' )->insert ( [
 				[

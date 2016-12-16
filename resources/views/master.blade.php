@@ -52,6 +52,12 @@
         // This command is used to initialize some elements and make them work properly
         $.material.init();
     });
+
+    window.setTimeout(function() {
+    	$("#alert_message").fadeTo(500, 0).slideUp(500, function() {
+    		$(this).remove();
+    	});
+    }, 2500);
 </script>
 </body>
 

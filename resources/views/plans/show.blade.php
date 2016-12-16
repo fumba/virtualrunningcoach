@@ -8,6 +8,15 @@
 	@endif @if ($weeks->isEmpty())
 	<p>Data not found.</p>
 	@else
+	<!-- alerts -->
+	@if (session('status'))
+
+	<div id="alert_message" class="alert alert-success">
+		<span class="close" data-dismiss="alert">x</span> <span>{{
+			session('status') }}</span>
+	</div>
+	@endif
+
 	<div id="accordion" role="tablist" aria-multiselectable="true">
 		@foreach ($weeks as $week)
 		<div class="card card-text">
@@ -44,10 +53,9 @@
 									<td>{!! $day->status == 0 ? '<i class="fa fa fa-circle-thin"
 										style="color: red"></i>': '<i class="fa fa-check-circle"
 										style="color: green"></i>' !!}
-									</td>
-									@if( Auth::check())
-									<td><a href="/plan/log/{!! $week->id !!}/{!! $day -> id !!}" class="btn btn-info btn-sm">Log</a></td>
-									@else
+									</td> @if( Auth::check())
+									<td><a href="/plan/log/{!! $week->id !!}/{!! $day -> id !!}"
+										class="btn btn-info btn-sm">Log</a></td> @else
 									<td><a href="/users/login" class="btn btn-info btn-sm">Log</a></td>
 									@endif
 								</tr>
