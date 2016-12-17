@@ -54,7 +54,7 @@ class PlansController extends Controller {
 		return view ( 'plans.show', [
 				'weeks' => $weeks,
 				'enrolled' => $enrolled,
-				'plan' => $plan
+				'curr_plan' => $plan
 		] );
 	}
 
@@ -65,9 +65,15 @@ class PlansController extends Controller {
 	 * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
 	 */
 	public function showLogScreen($week = '', $day = '') {
+		$plan = array ();
+		if (Auth::check ()) {
+			$type = Auth::user ()->plan_type;
+			$plan = Plan::whereType ( $type )->first ();
+		}
 		return view ( 'plans.log', [
 				'week' => $week,
-				'day' => $day
+				'day' => $day,
+				'curr_plan' => $plan
 		] );
 	}
 
@@ -93,10 +99,16 @@ class PlansController extends Controller {
 	 * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse|unknown
 	 */
 	public function enroll($type = '') {
+		$plan = array ();
+		if (Auth::check ()) {
+			$type = Auth::user ()->plan_type;
+			$plan = Plan::whereType ( $type )->first ();
+		}
 		$plans = Plan::all ();
 		return view ( 'plans.enroll', [
 				'plans' => $plans,
-				'type' => $type
+				'type' => $type,
+				'curr_plan' => $plan
 		] );
 	}
 

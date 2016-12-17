@@ -24,12 +24,19 @@
 									<h5>
 										<strong>{!!$plan->name!!} TRAINING </strong>
 									</h5>
-									<a href="plan/{!!$plan->type!!}"><i class="fa fa-list"></i> View Schedule</a><br>
-									<a href="plan/enroll/{!!$plan->type!!}"><i class="fa fa-plus"></i> Enroll</a>
+									<a href="plan/{!!$plan->type!!}"><i class="fa fa-list"></i>
+										View Schedule</a><br>
+									<!--  -->
+									@if( Auth::check()) <a href="plan/enroll/{!!$plan->type!!}"><i
+										class="fa fa-plus"></i> Enroll</a>
+									<!--  -->
+									@else <a href="users/login"><i class="fa fa-plus"></i>
+										Login to Enroll</a> @endif
 								</div>
 							</div>
 							<div class="col-xs-6">
-								<img class="card-image-custom" src="/images/{!!$plan->type!!}_plan.png"></img>
+								<img class="card-image-custom"
+									src="/images/{!!$plan->type!!}_plan.png"></img>
 							</div>
 						</div>
 					</div>

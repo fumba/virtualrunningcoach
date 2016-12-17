@@ -83,13 +83,13 @@ CREATE TABLE `days` (
 /*Data for the table `days` */
 
 insert  into `days`(`id`,`week_id`,`order`,`status`,`distance`,`name`,`details`,`created_at`,`updated_at`) values 
-(1,1,1,1,2,'Monday','Warm up: 10 minutes dynamic stretching.<br>Run 2 miles easy, taking walking breaks if needed.','2016-12-02 18:24:11','2016-12-02 18:24:11'),
-(2,1,1,1,0,'Tuesday','Cross Training Day: Pick your favourite (swimming, biking, rowing, etc.). Do 30 minutes at moderate intensity.','2016-12-02 18:24:11','2016-12-02 18:24:11'),
-(3,1,1,1,0,'Wednesday','Rest Day','2016-12-02 18:24:11','2016-12-02 18:24:11'),
-(4,1,1,0,2,'Thursday','Warm up: 10 minutes dynamic stretching. <br>Run 2 miles easy, taking walking breaks if needed.  ','2016-12-02 18:24:11','2016-12-02 18:24:11'),
-(5,1,1,0,0,'Friday','Strength Training Day: Do a total body workout that includes leg, arm, and core exercises.','2016-12-02 18:24:11','2016-12-02 18:24:11'),
-(6,1,1,0,3,'Saturday','Warm up: 10 minutes dynamic stretching. <br>Run 3 miles. If needed, take 3 minutes walking between each mile.','2016-12-02 18:24:11','2016-12-02 18:24:11'),
-(7,1,1,0,2,'Sunday','Rest Day','2016-12-02 18:24:11','2016-12-02 18:24:11');
+(1,1,1,1,2,'Monday','Warm up: 10 minutes dynamic stretching.<br>Run 2 miles easy, taking walking breaks if needed.','2016-12-17 02:47:57','2016-12-17 02:47:57'),
+(2,1,1,1,0,'Tuesday','Cross Training Day: Pick your favourite (swimming, biking, rowing, etc.). Do 30 minutes at moderate intensity.','2016-12-17 02:47:57','2016-12-17 02:47:57'),
+(3,1,1,1,0,'Wednesday','Rest Day','2016-12-17 02:47:57','2016-12-17 02:47:57'),
+(4,1,1,0,2,'Thursday','Warm up: 10 minutes dynamic stretching. <br>Run 2 miles easy, taking walking breaks if needed.  ','2016-12-17 02:47:57','2016-12-17 02:47:57'),
+(5,1,1,0,0,'Friday','Strength Training Day: Do a total body workout that includes leg, arm, and core exercises.','2016-12-17 02:47:57','2016-12-17 02:47:57'),
+(6,1,1,0,3,'Saturday','Warm up: 10 minutes dynamic stretching. <br>Run 3 miles. If needed, take 3 minutes walking between each mile.','2016-12-17 02:47:57','2016-12-17 02:47:57'),
+(7,1,1,0,2,'Sunday','Rest Day','2016-12-17 02:47:57','2016-12-17 02:47:57');
 
 /*Table structure for table `migrations` */
 
@@ -100,23 +100,24 @@ CREATE TABLE `migrations` (
   `migration` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=424 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=568 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*Data for the table `migrations` */
 
 insert  into `migrations`(`id`,`migration`,`batch`) values 
-(412,'2014_10_12_000000_create_users_table',1),
-(413,'2014_10_12_100000_create_password_resets_table',1),
-(414,'2016_11_11_165450_create_tickets_table',1),
-(415,'2016_11_15_015736_create_comments_table',1),
-(416,'2016_11_16_024511_create_permission_tables',1),
-(417,'2016_11_16_225022_create_posts_table',1),
-(418,'2016_11_16_233228_create_categories_table',1),
-(419,'2016_11_16_233705_create_category_post_table',1),
-(420,'2016_11_17_211623_add_post_type_to_comments_table',1),
-(421,'2016_11_21_202732_create_plans_table',1),
-(422,'2016_11_21_213620_create_weeks_table',1),
-(423,'2016_11_22_224042_create_days_table',1);
+(555,'2014_10_12_000000_create_users_table',1),
+(556,'2014_10_12_100000_create_password_resets_table',1),
+(557,'2016_11_11_165450_create_tickets_table',1),
+(558,'2016_11_15_015736_create_comments_table',1),
+(559,'2016_11_16_024511_create_permission_tables',1),
+(560,'2016_11_16_225022_create_posts_table',1),
+(561,'2016_11_16_233228_create_categories_table',1),
+(562,'2016_11_16_233705_create_category_post_table',1),
+(563,'2016_11_17_211623_add_post_type_to_comments_table',1),
+(564,'2016_11_21_202732_create_plans_table',1),
+(565,'2016_11_21_213620_create_weeks_table',1),
+(566,'2016_11_22_224042_create_days_table',1),
+(567,'2016_12_16_161056_create_plan_days_table',1);
 
 /*Table structure for table `password_resets` */
 
@@ -147,6 +148,123 @@ CREATE TABLE `permissions` (
 
 /*Data for the table `permissions` */
 
+/*Table structure for table `plan_days` */
+
+DROP TABLE IF EXISTS `plan_days`;
+
+CREATE TABLE `plan_days` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL DEFAULT '0',
+  `day_1` int(11) NOT NULL DEFAULT '0',
+  `day_2` int(11) NOT NULL DEFAULT '0',
+  `day_3` int(11) NOT NULL DEFAULT '0',
+  `day_4` int(11) NOT NULL DEFAULT '0',
+  `day_5` int(11) NOT NULL DEFAULT '0',
+  `day_6` int(11) NOT NULL DEFAULT '0',
+  `day_7` int(11) NOT NULL DEFAULT '0',
+  `day_8` int(11) NOT NULL DEFAULT '0',
+  `day_9` int(11) NOT NULL DEFAULT '0',
+  `day_10` int(11) NOT NULL DEFAULT '0',
+  `day_11` int(11) NOT NULL DEFAULT '0',
+  `day_12` int(11) NOT NULL DEFAULT '0',
+  `day_13` int(11) NOT NULL DEFAULT '0',
+  `day_14` int(11) NOT NULL DEFAULT '0',
+  `day_15` int(11) NOT NULL DEFAULT '0',
+  `day_16` int(11) NOT NULL DEFAULT '0',
+  `day_17` int(11) NOT NULL DEFAULT '0',
+  `day_18` int(11) NOT NULL DEFAULT '0',
+  `day_19` int(11) NOT NULL DEFAULT '0',
+  `day_20` int(11) NOT NULL DEFAULT '0',
+  `day_21` int(11) NOT NULL DEFAULT '0',
+  `day_22` int(11) NOT NULL DEFAULT '0',
+  `day_23` int(11) NOT NULL DEFAULT '0',
+  `day_24` int(11) NOT NULL DEFAULT '0',
+  `day_25` int(11) NOT NULL DEFAULT '0',
+  `day_26` int(11) NOT NULL DEFAULT '0',
+  `day_27` int(11) NOT NULL DEFAULT '0',
+  `day_28` int(11) NOT NULL DEFAULT '0',
+  `day_29` int(11) NOT NULL DEFAULT '0',
+  `day_30` int(11) NOT NULL DEFAULT '0',
+  `day_31` int(11) NOT NULL DEFAULT '0',
+  `day_32` int(11) NOT NULL DEFAULT '0',
+  `day_33` int(11) NOT NULL DEFAULT '0',
+  `day_34` int(11) NOT NULL DEFAULT '0',
+  `day_35` int(11) NOT NULL DEFAULT '0',
+  `day_36` int(11) NOT NULL DEFAULT '0',
+  `day_37` int(11) NOT NULL DEFAULT '0',
+  `day_38` int(11) NOT NULL DEFAULT '0',
+  `day_39` int(11) NOT NULL DEFAULT '0',
+  `day_40` int(11) NOT NULL DEFAULT '0',
+  `day_41` int(11) NOT NULL DEFAULT '0',
+  `day_42` int(11) NOT NULL DEFAULT '0',
+  `day_43` int(11) NOT NULL DEFAULT '0',
+  `day_44` int(11) NOT NULL DEFAULT '0',
+  `day_45` int(11) NOT NULL DEFAULT '0',
+  `day_46` int(11) NOT NULL DEFAULT '0',
+  `day_47` int(11) NOT NULL DEFAULT '0',
+  `day_48` int(11) NOT NULL DEFAULT '0',
+  `day_49` int(11) NOT NULL DEFAULT '0',
+  `day_50` int(11) NOT NULL DEFAULT '0',
+  `day_51` int(11) NOT NULL DEFAULT '0',
+  `day_52` int(11) NOT NULL DEFAULT '0',
+  `day_53` int(11) NOT NULL DEFAULT '0',
+  `day_54` int(11) NOT NULL DEFAULT '0',
+  `day_55` int(11) NOT NULL DEFAULT '0',
+  `day_56` int(11) NOT NULL DEFAULT '0',
+  `day_57` int(11) NOT NULL DEFAULT '0',
+  `day_58` int(11) NOT NULL DEFAULT '0',
+  `day_59` int(11) NOT NULL DEFAULT '0',
+  `day_60` int(11) NOT NULL DEFAULT '0',
+  `day_61` int(11) NOT NULL DEFAULT '0',
+  `day_62` int(11) NOT NULL DEFAULT '0',
+  `day_63` int(11) NOT NULL DEFAULT '0',
+  `day_64` int(11) NOT NULL DEFAULT '0',
+  `day_65` int(11) NOT NULL DEFAULT '0',
+  `day_66` int(11) NOT NULL DEFAULT '0',
+  `day_67` int(11) NOT NULL DEFAULT '0',
+  `day_68` int(11) NOT NULL DEFAULT '0',
+  `day_69` int(11) NOT NULL DEFAULT '0',
+  `day_70` int(11) NOT NULL DEFAULT '0',
+  `day_71` int(11) NOT NULL DEFAULT '0',
+  `day_72` int(11) NOT NULL DEFAULT '0',
+  `day_73` int(11) NOT NULL DEFAULT '0',
+  `day_74` int(11) NOT NULL DEFAULT '0',
+  `day_75` int(11) NOT NULL DEFAULT '0',
+  `day_76` int(11) NOT NULL DEFAULT '0',
+  `day_77` int(11) NOT NULL DEFAULT '0',
+  `day_78` int(11) NOT NULL DEFAULT '0',
+  `day_79` int(11) NOT NULL DEFAULT '0',
+  `day_80` int(11) NOT NULL DEFAULT '0',
+  `day_81` int(11) NOT NULL DEFAULT '0',
+  `day_82` int(11) NOT NULL DEFAULT '0',
+  `day_83` int(11) NOT NULL DEFAULT '0',
+  `day_84` int(11) NOT NULL DEFAULT '0',
+  `day_85` int(11) NOT NULL DEFAULT '0',
+  `day_86` int(11) NOT NULL DEFAULT '0',
+  `day_87` int(11) NOT NULL DEFAULT '0',
+  `day_88` int(11) NOT NULL DEFAULT '0',
+  `day_89` int(11) NOT NULL DEFAULT '0',
+  `day_90` int(11) NOT NULL DEFAULT '0',
+  `day_91` int(11) NOT NULL DEFAULT '0',
+  `day_92` int(11) NOT NULL DEFAULT '0',
+  `day_93` int(11) NOT NULL DEFAULT '0',
+  `day_94` int(11) NOT NULL DEFAULT '0',
+  `day_95` int(11) NOT NULL DEFAULT '0',
+  `day_96` int(11) NOT NULL DEFAULT '0',
+  `day_97` int(11) NOT NULL DEFAULT '0',
+  `day_98` int(11) NOT NULL DEFAULT '0',
+  `day_99` int(11) NOT NULL DEFAULT '0',
+  `day_100` int(11) NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+/*Data for the table `plan_days` */
+
+insert  into `plan_days`(`id`,`user_id`,`day_1`,`day_2`,`day_3`,`day_4`,`day_5`,`day_6`,`day_7`,`day_8`,`day_9`,`day_10`,`day_11`,`day_12`,`day_13`,`day_14`,`day_15`,`day_16`,`day_17`,`day_18`,`day_19`,`day_20`,`day_21`,`day_22`,`day_23`,`day_24`,`day_25`,`day_26`,`day_27`,`day_28`,`day_29`,`day_30`,`day_31`,`day_32`,`day_33`,`day_34`,`day_35`,`day_36`,`day_37`,`day_38`,`day_39`,`day_40`,`day_41`,`day_42`,`day_43`,`day_44`,`day_45`,`day_46`,`day_47`,`day_48`,`day_49`,`day_50`,`day_51`,`day_52`,`day_53`,`day_54`,`day_55`,`day_56`,`day_57`,`day_58`,`day_59`,`day_60`,`day_61`,`day_62`,`day_63`,`day_64`,`day_65`,`day_66`,`day_67`,`day_68`,`day_69`,`day_70`,`day_71`,`day_72`,`day_73`,`day_74`,`day_75`,`day_76`,`day_77`,`day_78`,`day_79`,`day_80`,`day_81`,`day_82`,`day_83`,`day_84`,`day_85`,`day_86`,`day_87`,`day_88`,`day_89`,`day_90`,`day_91`,`day_92`,`day_93`,`day_94`,`day_95`,`day_96`,`day_97`,`day_98`,`day_99`,`day_100`,`created_at`,`updated_at`) values 
+(1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'2016-12-17 03:00:10','2016-12-17 03:00:10');
+
 /*Table structure for table `plans` */
 
 DROP TABLE IF EXISTS `plans`;
@@ -164,10 +282,10 @@ CREATE TABLE `plans` (
 /*Data for the table `plans` */
 
 insert  into `plans`(`id`,`type`,`name`,`created_at`,`updated_at`) values 
-(1,'5k','5K','2016-12-02 18:24:11','2016-12-02 18:24:11'),
-(2,'10k','10K','2016-12-02 18:24:11','2016-12-02 18:24:11'),
-(3,'half_marathon','Half Marathon','2016-12-02 18:24:11','2016-12-02 18:24:11'),
-(4,'marathon','Marathon','2016-12-02 18:24:11','2016-12-02 18:24:11');
+(1,'5k','5K','2016-12-17 02:47:56','2016-12-17 02:47:56'),
+(2,'10k','10K','2016-12-17 02:47:56','2016-12-17 02:47:56'),
+(3,'half_marathon','Half Marathon','2016-12-17 02:47:56','2016-12-17 02:47:56'),
+(4,'marathon','Marathon','2016-12-17 02:47:56','2016-12-17 02:47:56');
 
 /*Table structure for table `posts` */
 
@@ -213,12 +331,9 @@ CREATE TABLE `roles` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `roles_name_unique` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*Data for the table `roles` */
-
-insert  into `roles`(`id`,`name`,`created_at`,`updated_at`) values 
-(1,'manager','2016-12-02 18:48:20','2016-12-02 18:48:20');
 
 /*Table structure for table `tickets` */
 
@@ -268,9 +383,6 @@ CREATE TABLE `user_has_roles` (
 
 /*Data for the table `user_has_roles` */
 
-insert  into `user_has_roles`(`role_id`,`user_id`) values 
-(1,1);
-
 /*Table structure for table `users` */
 
 DROP TABLE IF EXISTS `users`;
@@ -281,18 +393,17 @@ CREATE TABLE `users` (
   `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `remember_token` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `plan_type` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `plan_type` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*Data for the table `users` */
 
 insert  into `users`(`id`,`name`,`email`,`password`,`remember_token`,`plan_type`,`created_at`,`updated_at`) values 
-(1,'5K TEST USER','test@email.com','$2y$10$pRKzf6P5DTIlQB6bCcNB4uxdHXpUD6sZkm5QDgnx6H0mhcJC32R3.',NULL,'5k','2016-12-02 18:24:11','2016-12-02 18:49:35'),
-(2,'NO PLAN TEST USER','test2@email.com','$2y$10$Cf5UWbsU/a9jQTfV2g5FueATbVp5ho78reO2bM1cFKTZ3QwwgqoXm','oJHN7RfJCCDEzyvkoX5ocvqSZpxKVq76YubpSY0BlQI9SprrN8vt5nyBOOeW','','2016-12-02 18:24:11','2016-12-02 19:01:58');
+(1,'Fumbani','test@gmail.com','$2y$10$jWNFEyCzRgGaUILkYfKgDuEuDvJFmyqaTWMbgrUVNcVo6yNi7.aiO',NULL,'','2016-12-17 03:00:10','2016-12-17 03:00:10');
 
 /*Table structure for table `weeks` */
 
@@ -309,8 +420,8 @@ CREATE TABLE `weeks` (
 /*Data for the table `weeks` */
 
 insert  into `weeks`(`id`,`plan_id`,`created_at`,`updated_at`) values 
-(1,1,'2016-12-02 18:24:11','2016-12-02 18:24:11'),
-(2,1,'2016-12-02 18:24:11','2016-12-02 18:24:11');
+(1,1,'2016-12-17 02:47:57','2016-12-17 02:47:57'),
+(2,1,'2016-12-17 02:47:57','2016-12-17 02:47:57');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

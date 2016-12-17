@@ -1,10 +1,10 @@
-@extends('master') @section('title', $plan->name.' TRAINING')
+@extends('master') @section('title', $curr_plan->name.' TRAINING')
 @section('content')
 
 <div class="container col-md-8 col-md-offset-2">
 
-	@if ($plan->name)
-	<div class="alert alert-info">{!! $plan->name !!} TRAINING</div>
+	@if ($curr_plan->name)
+	<div class="alert alert-info">{!! $curr_plan->name !!} TRAINING</div>
 	@endif @if ($weeks->isEmpty())
 	<p>Data not found.</p>
 	@else
@@ -61,7 +61,7 @@
 										class="btn btn-info btn-sm">Log</a></td>
 									<!--  -->
 									@else
-									<td><a href="/plan/enroll/{!! $plan->type !!}"
+									<td><a href="/plan/enroll/{!! $curr_plan->type !!}"
 										class="btn btn-info btn-sm">Enroll</a></td>
 									<!--  -->
 									@endif
