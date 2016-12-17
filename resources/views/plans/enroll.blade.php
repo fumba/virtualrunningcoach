@@ -22,6 +22,7 @@
 							<div class="btn-group" data-toggle="buttons">
 								@foreach($plans as $plan) <label
 									class="btn  btn-default {!! $plan->type == $type ? 'active' : ''  !!}">
+
 									<input type="radio" name="options"
 									id="option{!! $plan->type !!}" autocomplete="off" {!! $plan->type
 									== $type ? 'checked' : '' !!} value="{!! $plan->type !!}"> {!!

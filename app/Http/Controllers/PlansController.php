@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\EnrollFormRequest;
 use App\Http\Requests\LogMilesFormRequest;
 use App\PlanDays;
+use App\Helper\CommonUtilities;
 
 class PlansController extends Controller {
 
@@ -33,11 +34,27 @@ class PlansController extends Controller {
 		$weeks = $plan->weeks ()->get ();
 		foreach ( $weeks as $week ) {
 			$week->days = $week->days ()->orderBy ( 'order', 'ASC' )->get ();
+
+			// for each day, retrieve the logged miles for the user
+			if (Auth::check ()) {
+				foreach ( $week->days as $day ) {
+					$day_num = CommonUtilities::weekDayToDayNumber ( $week->id, CommonUtilities::dayNameToCount ( $day->name ) );
+					$user = Auth::user ();
+					$plan_days = PlanDays::whereUserId ( $user->id )->first ();
+					$day->logged = $plan_days->$day_num;
+				}
+			} // end for
+		}
+
+		$enrolled = false;
+		if (Auth::check ()) {
+			$enrolled = Auth::user ()->plan_type != '';
 		}
 
 		return view ( 'plans.show', [
 				'weeks' => $weeks,
-				'name' => $plan->name
+				'enrolled' => $enrolled,
+				'plan' => $plan
 		] );
 	}
 
@@ -48,7 +65,10 @@ class PlansController extends Controller {
 	 * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
 	 */
 	public function showLogScreen($week = '', $day = '') {
-		return view ( 'plans.log', [ ] );
+		return view ( 'plans.log', [
+				'week' => $week,
+				'day' => $day
+		] );
 	}
 
 	/**
@@ -58,8 +78,11 @@ class PlansController extends Controller {
 	public function saveLoggedMiles(LogMilesFormRequest $request) {
 		$user = Auth::user ();
 		$plan_days = PlanDays::whereUserId ( $user->id )->first ();
-		$plan_days->day_1 = $request->get ( 'miles' );
-		$plan_days -> save();
+
+		$day = CommonUtilities::weekDayToDayNumber ( $request->get ( 'week' ), $request->get ( 'day' ) );
+
+		$plan_days->$day = $request->get ( 'miles' );
+		$plan_days->save ();
 		return redirect ( action ( 'PlansController@showPlans' ) )->with ( 'status', 'Your miles have been logged!' );
 	}
 
@@ -86,6 +109,6 @@ class PlansController extends Controller {
 		$user = Auth::user ();
 		$user->plan_type = $request->get ( 'options' );
 		$user->save ();
-		return redirect ( action ( 'PlansController@showPlans' ) )->with ( 'status', 'The post has been updated!' );
+		return redirect ( action ( 'PlansController@showPlans' ) )->with ( 'status', 'You have been successully enrolled!' );
 	}
 }

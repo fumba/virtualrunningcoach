@@ -1,10 +1,10 @@
-@extends('master') @section('title', $name.' TRAINING')
+@extends('master') @section('title', $plan->name.' TRAINING')
 @section('content')
 
 <div class="container col-md-8 col-md-offset-2">
 
-	@if ($name)
-	<div class="alert alert-success">{!! $name !!} TRAINING</div>
+	@if ($plan->name)
+	<div class="alert alert-info">{!! $plan->name !!} TRAINING</div>
 	@endif @if ($weeks->isEmpty())
 	<p>Data not found.</p>
 	@else
@@ -52,11 +52,22 @@
 											$day->distance !!} miles ...</button></td>
 									<td>{!! $day->status == 0 ? '<i class="fa fa fa-circle-thin"
 										style="color: red"></i>': '<i class="fa fa-check-circle"
-										style="color: green"></i>' !!}
-									</td> @if( Auth::check())
+										style="color: green"></i>' !!} <!-- miles logged (for signed in users) -->
+										@if( Auth::check()) {!! $day -> logged !!} @endif
+									</td>
+									<!--  -->
+									@if( Auth::check() ) @if( $enrolled )
 									<td><a href="/plan/log/{!! $week->id !!}/{!! $day -> id !!}"
-										class="btn btn-info btn-sm">Log</a></td> @else
-									<td><a href="/users/login" class="btn btn-info btn-sm">Log</a></td>
+										class="btn btn-info btn-sm">Log</a></td>
+									<!--  -->
+									@else
+									<td><a href="/plan/enroll/{!! $plan->type !!}"
+										class="btn btn-info btn-sm">Enroll</a></td>
+									<!--  -->
+									@endif
+									<!--  -->
+									@else
+									<td><a href="/users/login" class="btn btn-info btn-sm">Log in</a></td>
 									@endif
 								</tr>
 

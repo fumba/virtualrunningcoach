@@ -4,10 +4,10 @@
     <meta charset="utf-8">
 </head>
 <body>
-<h2>Learning Laravel!</h2>
+<h2>New User Registered!</h2>
 
 <div>
-    You have a new ticket. The ticket id is {!! $ticket !!}!
+    You have a new user. Email -  {!! $email !!} , Name - {!! $name !!}!
 </div>
 
 </body>

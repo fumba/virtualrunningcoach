@@ -1,6 +1,4 @@
-@extends('master') @section('title', 'Log Miles')
-
-@section('content')
+@extends('master') @section('title', 'Log Miles') @section('content')
 <div class="container col-md-8 col-md-offset-2">
 	<div class="well well bs-component">
 
@@ -10,8 +8,16 @@
 			<p class="alert alert-danger">{{ $error }}</p>
 			@endforeach @if (session('status'))
 			<div class="alert alert-success">{{ session('status') }}</div>
-			@endif <input type="hidden" name="_token"
-				value="{!! csrf_token() !!}">
+			@endif
+			<!--  -->
+
+			<!-- token -->
+			{{ Form::hidden('_token', csrf_token() ) }}
+			<!--  week -->
+			{{ Form::hidden('week', $week ) }}
+			<!-- day of the week  -->
+			{{ Form::hidden('day', $day ) }}
+
 
 			<fieldset>
 				<legend>Select Plan</legend>
@@ -20,7 +26,7 @@
 					<div class="col-lg-10">
 
 						<div id="miles_container">
-						<input id="miles" type="text" value="0.00" name="miles">
+							<input id="miles" type="text" value="0.00" name="miles">
 						</div>
 						<script>
             $("input[name='miles']").TouchSpin({

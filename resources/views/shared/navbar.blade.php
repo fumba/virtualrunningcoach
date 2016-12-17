@@ -22,7 +22,7 @@
 					href="/">Home</a></li> @if (Auth::check())
 				@if(Auth::user()->plan_type != '')
 				<li><a href="/plan"
-					class="{{ Request::is('plan') ? 'active' : '' }}">Current Plan</a></li>
+					class="{{ Request::is('plan') ? 'active' : '' }}">Current Plan ({!! $plan->name  !!}) </a></li>
 				@endif @role('manager')
 				<li><a href="/admin"
 					class="{{ Request::is('admin') ? 'active' : '' }}">Admin</a></li>
