@@ -9,8 +9,7 @@ class PagesController extends Controller {
 
 	// Home page
 	public function home() {
-
-		$plan = array();
+		$plan = array ();
 
 		if (Auth::check ()) {
 			$type = Auth::user ()->plan_type;
@@ -22,15 +21,5 @@ class PagesController extends Controller {
 				'plans' => $plans,
 				'curr_plan' => $plan
 		] );
-	}
-
-	// About page
-	public function about() {
-		return view ( 'about' );
-	}
-
-	// Contact page
-	public function contact() {
-		return view ( 'tickets.create' );
 	}
 }
