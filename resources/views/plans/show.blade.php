@@ -39,7 +39,7 @@
 						cupidatat skateboard dolor brunch. Food truck quinoa nesciunt
 						laborum eiusmod.</p>
 
-					<div class="table-responsive plans-table">
+					<div class="table-responsive plans-table ">
 						<table class="table table-inverse">
 							<thead>
 							</thead>
@@ -48,12 +48,15 @@
 								<tr>
 									<td>{!! $day->name !!}</td>
 									<td><button type="button" class="btn btn-info btn-sm"
-											data-toggle="modal" data-target="#modal{!! $day->id !!}">{!!
-											$day->distance !!} miles ...</button></td>
-									<td>{!! $day->status == 0 ? '<i class="fa fa fa-circle-thin"
-										style="color: red"></i>': '<i class="fa fa-check-circle"
-										style="color: green"></i>' !!} <!-- miles logged (for signed in users) -->
-										@if( Auth::check()) {!! $day -> logged !!} @endif
+											data-toggle="modal" data-target="#modal{!! $day->id !!}">
+											<!--  -->
+											{!! $day->distance !!} miles ...
+										</button></td>
+									<td>
+										<!--  --> @if( !($day->status) )<i
+										class="fa fa fa-circle-thin" style="color: red"></i> @else<i
+										class="fa fa-check-circle" style="color: green"></i><span
+										class="table_small"> Logged: {!! $day -> logged !!}</span>@endif
 									</td>
 									<!--  -->
 									@if( Auth::check() ) @if( $enrolled )

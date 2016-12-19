@@ -21,20 +21,20 @@ class PlansController extends Controller {
 	/**
 	 * Retrieves plan info and displays the main page for plan types.
 	 *
-	 * @param string $type
+	 * @param string $plan_type
 	 *        	- type of plan
 	 * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse|unknown
 	 */
-	public function showPlans($type = '') {
-		if ($type == '' && Auth::check ()) {
-			$type = Auth::user ()->plan_type;
+	public function showPlans($plan_type = '') {
+		if ($plan_type == '' && Auth::check ()) {
+			$plan_type = Auth::user ()->plan_type;
 		}
 		// redirect back to main page if plan is not specified in request
-		if ($type == '') {
+		if ($plan_type == '') {
 			return redirect ( '/' );
 		}
 		// redirect back to main page if the specified plan does not exist
-		$plan = Plan::whereType ( $type )->first ();
+		$plan = Plan::whereType ( $plan_type )->first ();
 		if (! $plan) {
 			return redirect ( '/' );
 		}
@@ -50,11 +50,12 @@ class PlansController extends Controller {
 					$user = Auth::user ();
 					$plan_days = PlanDays::whereUserId ( $user->id )->first ();
 					$day->logged = $plan_days->$day_num;
+					$day->status = CommonUtilities::hasMinDistLogged ( $plan_type, $day->logged, $day->distance );
 				}
 			} // end for
 		}
 
-		$enrolled = CommonUtilities::isEnrolled ( $type );
+		$enrolled = CommonUtilities::isEnrolled ( $plan_type );
 		$curr_plan = CommonUtilities::getCurrentPlan ();
 		return view ( 'plans.show', [
 				'weeks' => $weeks,

@@ -37,6 +37,16 @@ class CommonUtilities {
 	}
 
 	/**
+	 * Determine if the minimum distance has been logged.
+	 */
+	public static function hasMinDistLogged($plan_type, $logged, $required) {
+		if (CommonUtilities::isEnrolled ( $plan_type ) && $logged >= $required) {
+			return true;
+		}
+		return false;
+	}
+
+	/**
 	 * Given the week and day of the week, this function computes the correspond day count.
 	 *
 	 * eg. Week 2 - Day 2 == Day Count 16.

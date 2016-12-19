@@ -17,8 +17,7 @@ class CreateDaysTable extends Migration
             $table->increments('id');
             $table->integer('week_id');
             $table->integer('order') -> nullable(false);
-            $table->integer('status')->default(0);
-            $table->integer('distance')->default(0);
+            $table->float('distance')->default(0);
             $table->string('name', 20);
             $table->string('details');
             $table->timestamps();

@@ -74,7 +74,12 @@ body {
 }
 
 .plans-table {
-	max-width: 400px;
+	max-width: 800px;
+}
+
+.table_small{
+	font-size: medium;
+	font-family: cambria;
 }
 
 .btn-sm {
