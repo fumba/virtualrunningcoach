@@ -15,6 +15,7 @@ use App\Http\Requests\EnrollFormRequest;
 use App\Http\Requests\LogMilesFormRequest;
 use App\PlanDays;
 use App\Helper\CommonUtilities;
+use DateTime;
 
 class PlansController extends Controller {
 
@@ -41,18 +42,26 @@ class PlansController extends Controller {
 
 		$weeks = $plan->weeks ()->get ();
 		foreach ( $weeks as $week ) {
-			$week->days = $week->days ()->orderBy ( 'order', 'ASC' )->get ();
+			$week->days = $week->days ()->get ();
 
 			// for each day, retrieve the logged miles for the user
 			if (Auth::check ()) {
 				foreach ( $week->days as $day ) {
-					$day_num = CommonUtilities::weekDayToDayNumber ( $week->id, CommonUtilities::dayNameToCount ( $day->name ) );
+					$day_num = 'day_' . CommonUtilities::weekDayToDayNumber ( $week->order, CommonUtilities::dayNameToCount ( $day->name ) );
 					$user = Auth::user ();
 					$plan_days = PlanDays::whereUserId ( $user->id )->first ();
 					$day->logged = $plan_days->$day_num;
 					$day->status = CommonUtilities::hasMinDistLogged ( $plan_type, $day->logged, $day->distance );
+					$day->count = CommonUtilities::dayNameToCount ( $day->name );
+
+					// mark the current week and day for the logged in user
+					$week->current = CommonUtilities::isCurrentWeek ( $week->order, $day->name );
+					$day->current = CommonUtilities::isCurrentDay ( $week->order, $day->name );
 				}
-			} // end for
+			} else {
+				// for non-logged in users, the first week will always be marked as current
+				$weeks [0]->current = true;
+			}
 		}
 
 		$enrolled = CommonUtilities::isEnrolled ( $plan_type );
@@ -88,7 +97,7 @@ class PlansController extends Controller {
 		$user = Auth::user ();
 		$plan_days = PlanDays::whereUserId ( $user->id )->first ();
 
-		$day = CommonUtilities::weekDayToDayNumber ( $request->get ( 'week' ), $request->get ( 'day' ) );
+		$day = 'day_' . CommonUtilities::weekDayToDayNumber ( $request->get ( 'week' ), $request->get ( 'day' ) );
 
 		$plan_days->$day = $request->get ( 'miles' );
 		$plan_days->save ();
@@ -120,6 +129,7 @@ class PlansController extends Controller {
 	public function saveEnrollment(EnrollFormRequest $request) {
 		$user = Auth::user ();
 		$user->plan_type = $request->get ( 'options' );
+		$user->plan_start_dt = new DateTime ();
 		$user->save ();
 		return redirect ( action ( 'PlansController@showPlans' ) )->with ( 'status', 'You have been successully enrolled!' );
 	}

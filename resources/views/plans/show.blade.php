@@ -24,13 +24,13 @@
 				<h5 class="mb-0">
 					<a data-toggle="collapse" data-parent="#accordion"
 						href="#collapse{!! $week->id !!}"
-						aria-controls="collapse{!! $week->id !!}"> Week {!! $week->name
+						aria-controls="collapse{!! $week->id !!}"> Week {!! $week->order
 						!!} </a>
 				</h5>
 			</div>
 
 			<div id="collapse{!! $week->id !!}"
-				class="{!! $week->name == 1 ? 'collapse in': 'collapse' !!}"
+				class="{!! $week->current ? 'collapse in': 'collapse' !!}"
 				role="tabpanel" aria-labelledby="heading{!! $week->id !!}">
 				<div class="card-block">
 
@@ -60,7 +60,7 @@
 									</td>
 									<!--  -->
 									@if( Auth::check() ) @if( $enrolled )
-									<td><a href="/plan/log/{!! $week->id !!}/{!! $day -> id !!}"
+									<td><a href="/plan/log/{!! $week->order !!}/{!! $day -> count !!}"
 										class="btn btn-info btn-sm">Log</a></td>
 									<!--  -->
 									@else

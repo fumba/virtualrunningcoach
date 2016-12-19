@@ -11,6 +11,8 @@ namespace App\Helper;
 
 use Illuminate\Support\Facades\Auth;
 use App\Plan;
+use DateTime;
+use DateInterval;
 
 class CommonUtilities {
 
@@ -24,6 +26,44 @@ class CommonUtilities {
 			$plan = Plan::whereType ( $type )->first ();
 		}
 		return $plan;
+	}
+
+	/**
+	 * Determine if this is the current week for the program in which the user enrolled in.
+	 *
+	 * @return boolean
+	 */
+	public static function isCurrentWeek($week_order_num, $day_name) {
+		return CommonUtilities::isCurrentDayOrWeek ( $week_order_num, $day_name, 7 );
+	}
+
+	/**
+	 * Determine if this the current day for the program in which the user enrolled in.
+	 *
+	 * @return boolean
+	 */
+	public static function isCurrentDay($week_order_num, $day_name) {
+		return CommonUtilities::isCurrentDayOrWeek ( $week_order_num, $day_name, 0 );
+	}
+
+	/**
+	 * Helper function for isCurrentWeek and isCurrentDay
+	 *
+	 * @param unknown $week_order_num
+	 * @param unknown $day_name
+	 * @param unknown $factor
+	 * @return boolean
+	 */
+	private static function isCurrentDayOrWeek($week_order_num, $day_name, $factor) {
+		$now = (new DateTime ())->setTime ( 0, 0, 0 );
+		$date = (new DateTime ( Auth::user ()->plan_start_dt ))->setTime ( 0, 0, 0 );
+		for($i = 0; $i < CommonUtilities::weekDayToDayNumber ( $week_order_num, CommonUtilities::dayNameToCount ( $day_name ) ) - 1; $i ++) {
+			$date->add ( new DateInterval ( 'P1D' ) );
+		}
+		if ($date->diff ( $now )->days <= $factor) {
+			return true;
+		}
+		return false;
 	}
 
 	/**
@@ -54,12 +94,7 @@ class CommonUtilities {
 	 * @return number
 	 */
 	public static function weekDayToDayNumber($week, $day) {
-		$day_count = 0;
-		if ($week > 1) {
-			$day_count = $week * 7;
-		}
-		$day_count += $day;
-		return 'day_' . $day_count;
+		return (($week - 1) * 7) + $day;
 	}
 
 	/**

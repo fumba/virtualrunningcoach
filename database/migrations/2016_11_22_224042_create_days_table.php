@@ -16,7 +16,6 @@ class CreateDaysTable extends Migration
         Schema::create('days', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('week_id');
-            $table->integer('order') -> nullable(false);
             $table->float('distance')->default(0);
             $table->string('name', 20);
             $table->string('details');
