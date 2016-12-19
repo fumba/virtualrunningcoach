@@ -43,7 +43,6 @@ class PlansController extends Controller {
 		$weeks = $plan->weeks ()->get ();
 		foreach ( $weeks as $week ) {
 			$week->days = $week->days ()->get ();
-
 			// for each day, retrieve the logged miles for the user
 			if (Auth::check ()) {
 				foreach ( $week->days as $day ) {

@@ -94,3 +94,7 @@ body {
 #miles_container {
 	max-width: 300px;
 }
+
+.highlighted_row{
+	background-color: yellow;
+}

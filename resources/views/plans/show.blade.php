@@ -45,8 +45,14 @@
 							</thead>
 							<tbody>
 								@foreach ($week->days as $day)
+								<!--  -->
+								@if($day->current)
+								<tr class="highlighted_row">
+									@else
 								<tr>
-									<td>{!! $day->name !!}</td>
+									@endif
+
+									<td>{!! $day->name !!} @if($day->current) (today) @endif</td>
 									<td><button type="button" class="btn btn-info btn-sm"
 											data-toggle="modal" data-target="#modal{!! $day->id !!}">
 											<!--  -->
@@ -60,7 +66,8 @@
 									</td>
 									<!--  -->
 									@if( Auth::check() ) @if( $enrolled )
-									<td><a href="/plan/log/{!! $week->order !!}/{!! $day -> count !!}"
+									<td><a
+										href="/plan/log/{!! $week->order !!}/{!! $day -> count !!}"
 										class="btn btn-info btn-sm">Log</a></td>
 									<!--  -->
 									@else
