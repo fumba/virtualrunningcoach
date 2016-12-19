@@ -49,12 +49,15 @@ class PlansController extends Controller {
 		$enrolled = false;
 		if (Auth::check ()) {
 			$enrolled = Auth::user ()->plan_type != '';
+			$type = Auth::user ()->plan_type;
+			$curr_plan = Plan::whereType ( $type )->first ();
 		}
 
 		return view ( 'plans.show', [
 				'weeks' => $weeks,
 				'enrolled' => $enrolled,
-				'curr_plan' => $plan
+				'curr_plan' => $curr_plan,
+				'plan' => $plan
 		] );
 	}
 
