@@ -24,13 +24,13 @@
 				<h5 class="mb-0">
 					<a data-toggle="collapse" data-parent="#accordion"
 						href="#collapse{!! $week->id !!}"
-						aria-controls="collapse{!! $week->id !!}"> Week {!! $week->name !!}
-					</a>
+						aria-controls="collapse{!! $week->id !!}"> Week {!! $week->name
+						!!} </a>
 				</h5>
 			</div>
 
 			<div id="collapse{!! $week->id !!}"
-				class="{!! $week->id == 1 ? 'collapse in': 'collapse' !!}"
+				class="{!! $week->name == 1 ? 'collapse in': 'collapse' !!}"
 				role="tabpanel" aria-labelledby="heading{!! $week->id !!}">
 				<div class="card-block">
 
