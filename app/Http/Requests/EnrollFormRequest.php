@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Form Request for enrolling into a new plan.
+ *
+ * PHP version 7
+ *
+ * @author     Fumba Chibaka <fumba.me@gmail.com>
+ */
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -20,8 +27,8 @@ class EnrollFormRequest extends FormRequest {
 	 * @return array
 	 */
 	public function rules() {
-		return [ ]
+		return [ ];
 		//
-		;
+
 	}
 }

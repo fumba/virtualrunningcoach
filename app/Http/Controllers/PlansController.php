@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Controller for all dashboard pages.
+ *
+ * PHP version 7
+ *
+ * @author     Fumba Chibaka <fumba.me@gmail.com>
+ */
 namespace App\Http\Controllers;
 
 use App\Plan;
@@ -12,20 +19,21 @@ use App\Helper\CommonUtilities;
 class PlansController extends Controller {
 
 	/**
-	 * Opens the main page for plan types.
+	 * Retrieves plan info and displays the main page for plan types.
 	 *
 	 * @param string $type
+	 *        	- type of plan
 	 * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse|unknown
 	 */
 	public function showPlans($type = '') {
 		if ($type == '' && Auth::check ()) {
 			$type = Auth::user ()->plan_type;
 		}
-
+		// redirect back to main page if plan is not specified in request
 		if ($type == '') {
 			return redirect ( '/' );
 		}
-
+		// redirect back to main page if the specified plan does not exist
 		$plan = Plan::whereType ( $type )->first ();
 		if (! $plan) {
 			return redirect ( '/' );
@@ -46,13 +54,8 @@ class PlansController extends Controller {
 			} // end for
 		}
 
-		$enrolled = false;
-		if (Auth::check ()) {
-			$enrolled = Auth::user ()->plan_type != '';
-			$type = Auth::user ()->plan_type;
-			$curr_plan = Plan::whereType ( $type )->first ();
-		}
-
+		$enrolled = CommonUtilities::isEnrolled ( $type );
+		$curr_plan = CommonUtilities::getCurrentPlan ();
 		return view ( 'plans.show', [
 				'weeks' => $weeks,
 				'enrolled' => $enrolled,
@@ -68,15 +71,11 @@ class PlansController extends Controller {
 	 * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
 	 */
 	public function showLogScreen($week = '', $day = '') {
-		$plan = array ();
-		if (Auth::check ()) {
-			$type = Auth::user ()->plan_type;
-			$plan = Plan::whereType ( $type )->first ();
-		}
+		$curr_plan = CommonUtilities::getCurrentPlan ();
 		return view ( 'plans.log', [
 				'week' => $week,
 				'day' => $day,
-				'curr_plan' => $plan
+				'curr_plan' => $curr_plan
 		] );
 	}
 
@@ -103,15 +102,12 @@ class PlansController extends Controller {
 	 */
 	public function enroll($type = '') {
 		$plan = array ();
-		if (Auth::check ()) {
-			$type = Auth::user ()->plan_type;
-			$plan = Plan::whereType ( $type )->first ();
-		}
+		$curr_plan = CommonUtilities::getCurrentPlan ();
 		$plans = Plan::all ();
 		return view ( 'plans.enroll', [
 				'plans' => $plans,
 				'type' => $type,
-				'curr_plan' => $plan
+				'curr_plan' => $curr_plan
 		] );
 	}
 

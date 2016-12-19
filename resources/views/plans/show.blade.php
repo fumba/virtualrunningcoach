@@ -24,7 +24,7 @@
 				<h5 class="mb-0">
 					<a data-toggle="collapse" data-parent="#accordion"
 						href="#collapse{!! $week->id !!}"
-						aria-controls="collapse{!! $week->id !!}"> Week {!! $week->id !!}
+						aria-controls="collapse{!! $week->id !!}"> Week {!! $week->name !!}
 					</a>
 				</h5>
 			</div>

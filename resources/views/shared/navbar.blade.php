@@ -19,15 +19,19 @@
 			<ul class="nav navbar-nav navbar-right">
 				<li
 					class="{{ Request::is('/') || Request::is('home') ? 'active' : '' }}"><a
-					href="/">Home</a></li> @if (Auth::check())
+					href="/">Home</a></li>
+				<!--  -->
+				@if (Auth::check())
+				<!--  -->
 				@if(Auth::user()->plan_type != '')
 				<li><a href="/plan"
-					class="{{ Request::is('plan') ? 'active' : '' }}">Current Plan ({!! $curr_plan->name  !!}) </a></li>
-				@endif @role('manager')
-				<li><a href="/admin"
-					class="{{ Request::is('admin') ? 'active' : '' }}">Admin</a></li>
-				@endrole
-				<li><a href="/users/logout">Logout</a></li> @else
+					class="{{ Request::is('plan') ? 'active' : '' }}">Current Plan ({!!
+						$curr_plan->name !!}) </a></li>
+				<!--  -->
+				@endif
+				<li><a href="/users/logout">Logout</a></li>
+				<!--  -->
+				@else
 				<li><a href="/users/register"
 					class="{{ Request::is('/users/register') ? 'active' : '' }}">Register</a></li>
 				<li><a href="/users/login"
