@@ -53,9 +53,9 @@
 								<tr>
 									@endif
 
-									<td>@if($enrolled)<span>{{$day->modified_name}}</span> <!--  -->@else
-										<span>{{$day->name}}</span> @endif<!--  --> @if($day->current)
-										(today) @endif
+									<td>@if($enrolled)<span class="table_small">{{$day->modified_name}}</span>
+										<!--  -->@else <span class="table_small">{{$day->name}}</span>
+										@endif<!--  --> @if($day->current) (today) @endif
 									</td>
 									<td><button type="button" class="btn btn-info btn-sm"
 											data-toggle="modal" data-target="#modal{!! $day->id !!}">

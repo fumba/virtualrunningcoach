@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->string('plan_type')->default('');
-            $table->timestamp('plan_start_dt');
+            $table->dateTime('plan_start_dt')->nullable();
             $table->timestamps();
         });
     }
