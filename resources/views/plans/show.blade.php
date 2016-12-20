@@ -47,12 +47,16 @@
 								@foreach ($week->days as $day)
 								<!--  -->
 								@if($day->current)
-								<tr class="highlighted_row">
-									@else
+								<tr class="highlighted_row">@else
+
+
 								<tr>
 									@endif
 
-									<td>{!! $day->name !!} @if($day->current) (today) @endif</td>
+									<td>@if($enrolled)<span>{{$day->modified_name}}</span> <!--  -->@else
+										<span>{{$day->name}}</span> @endif<!--  --> @if($day->current)
+										(today) @endif
+									</td>
 									<td><button type="button" class="btn btn-info btn-sm"
 											data-toggle="modal" data-target="#modal{!! $day->id !!}">
 											<!--  -->

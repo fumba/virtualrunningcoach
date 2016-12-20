@@ -16,6 +16,7 @@ use App\Http\Requests\LogMilesFormRequest;
 use App\PlanDays;
 use App\Helper\CommonUtilities;
 use DateTime;
+use DateTimeZone;
 
 class PlansController extends Controller {
 
@@ -52,6 +53,7 @@ class PlansController extends Controller {
 					$day->logged = $plan_days->$day_num;
 					$day->status = CommonUtilities::hasMinDistLogged ( $plan_type, $day->logged, $day->distance );
 					$day->count = CommonUtilities::dayNameToCount ( $day->name );
+					$day->modified_name = CommonUtilities::getActualDayForRegisteredUser ( $week->order, $day->name );
 
 					// mark the current week and day for the logged in user
 					$week->current = CommonUtilities::isCurrentWeek ( $week->order, $day->name );
@@ -128,7 +130,7 @@ class PlansController extends Controller {
 	public function saveEnrollment(EnrollFormRequest $request) {
 		$user = Auth::user ();
 		$user->plan_type = $request->get ( 'options' );
-		$user->plan_start_dt = new DateTime ();
+		$user->plan_start_dt = new DateTime ( "now", new DateTimeZone ( 'America/New_York' ) );
 		$user->save ();
 		return redirect ( action ( 'PlansController@showPlans' ) )->with ( 'status', 'You have been successully enrolled!' );
 	}

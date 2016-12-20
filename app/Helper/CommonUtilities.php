@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Plan;
 use DateTime;
 use DateInterval;
+use DateTimeZone;
 
 class CommonUtilities {
 
@@ -55,15 +56,35 @@ class CommonUtilities {
 	 * @return boolean
 	 */
 	private static function isCurrentDayOrWeek($week_order_num, $day_name, $factor) {
-		$now = (new DateTime ())->setTime ( 0, 0, 0 );
+		$now = (new DateTime ( "now", new DateTimeZone ( 'America/New_York' ) ))->setTime ( 0, 0, 0 );
+		$date = (new DateTime ( Auth::user ()->plan_start_dt, new DateTimeZone ( 'America/New_York' ) ))->setTime ( 0, 0, 0 );
+		for($i = 0; $i < CommonUtilities::weekDayToDayNumber ( $week_order_num, CommonUtilities::dayNameToCount ( $day_name ) ) - 1; $i ++) {
+			$date->add ( new DateInterval ( 'P1D' ) );
+		}
+		// day calculation
+		if ($factor == 0 && ($date->diff ( $now )->days == $factor)) {
+			return true;
+		}
+		// week calculation
+		if ($factor == 7 && ($date->diff ( $now )->days <= $factor)) {
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 *
+	 * @param unknown $week_order_num
+	 * @param unknown $day_name
+	 * @param unknown $factor
+	 * @return unknown
+	 */
+	public static function getActualDayForRegisteredUser($week_order_num, $day_name) {
 		$date = (new DateTime ( Auth::user ()->plan_start_dt ))->setTime ( 0, 0, 0 );
 		for($i = 0; $i < CommonUtilities::weekDayToDayNumber ( $week_order_num, CommonUtilities::dayNameToCount ( $day_name ) ) - 1; $i ++) {
 			$date->add ( new DateInterval ( 'P1D' ) );
 		}
-		if ($date->diff ( $now )->days <= $factor) {
-			return true;
-		}
-		return false;
+		return $date->format ( 'D, M jS' );
 	}
 
 	/**
