@@ -14,7 +14,7 @@ use App\Week;
 
 class Day extends Model {
 
-	/**
+	/** 
 	 *
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
 	 */
