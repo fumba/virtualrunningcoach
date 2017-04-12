@@ -13,3 +13,15 @@ VRC is a web based tool used for tracking training progress for runers preparing
 ## Implementation
 
 This app uses the PHP Laravel framework 5.
+
+## Development setup
+
+1. Install [Git BASH](http://msysgit.github.io). <br/>
+2. Install Homestead (Vagrant based Virtual Machine) <br/>
+    - Install [Oracle VM VirtualBox](https://www.virtualbox.org/wiki/Downloads) <br/>
+    - Install [Vagrant](http://www.vagrantup.com/downloads.html)<br/>
+    - Clone homestead from github - <br>
+        `git clone https://github.com/laravel/homestead.git Homestead` <br>
+    - Go to Homestead folder - Run this command to create Homestead.yaml file
+        `bash init.sh`
+    - 
